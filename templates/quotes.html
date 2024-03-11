@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <h1>Quotes</h1>
+        <hr/>
+        <table>
+            {% for item in data %}
+            <tr>
+                <td>
+                    {{item["text"]}}
+                </td>
+                <td>
+                    <em>-- {{item["author"]}}</em>
+                </td>
+                <td>
+                    [ <a href="/edit/{{item['_id']}}">{{item["_id"]}}</a> ]
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
