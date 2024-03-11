@@ -1,36 +1,47 @@
 <html>
-    <body>
-        <h1>Edit Quote</h1>
-        <hr/>
-        <a href="/">Cancel</a>
 
-        <form id="create_quote" method="POST">
-            <input type="text" id="quoteauth" name="quoteauth" value="quoteauth"/>
-            <label for="quoteauth">Author</label><br>
-            <input type="text" id="quote" name="quoteauth" value="quoteauth">
-            <label for="quoteauth">Quote</label><br>
-            <button id="">Submit</button>
-        </form>
-        <script>
-            document
-        .getElementById("create_quote")
-        .addEventListener("submit", (e) => {
-          e.preventDefault();
-            console.log("Clicked")
-          let author = document.getElementById("quoteauth").value
-          let quote = document.getElementById("quote").value
-         
-          let xhr = new XMLHttpRequest();
-          xhr.open("POST", "/create",true);
-          xhr.onload = () => {
-            if (xhr.status === 200) {
-              alert(xhr.responseText);
-            }
-          };
-          xhr.setRequestHeader("Content-Type", "application/json");
-          let data = JSON.stringify({"author":author,"quote":quote});
-          xhr.send(data);
-        });
-        </script>
-    </body>
+<body>
+    <h1>Edit Quote</h1>
+    <hr />
+    <a href="/">Cancel</a>
+    {% if data %}
+    <form id="create_quote" method="POST">
+        <input type="text" id="quoteauth" name="quoteauth" value={{data.author}} />
+        <label for="quoteauth">Author</label><br>
+        <input type="text" id="quote" name="quoteauth" value={{data.quote}}>
+        <label for="quoteauth">Quote</label><br>
+        <button id="">Submit</button>
+    </form>
+    {% else %}
+    <form id="create_quote" method="POST">
+        <input type="text" id="quoteauth" name="quoteauth" value="quoteauth" />
+        <label for="quoteauth">Author</label><br>
+        <input type="text" id="quote" name="quoteauth" value="quoteauth">
+        <label for="quoteauth">Quote</label><br>
+        <button id="">Submit</button>
+    </form>
+    {% endif %}
+    <script>
+        document
+            .getElementById("create_quote")
+            .addEventListener("submit", (e) => {
+                e.preventDefault();
+                console.log("Clicked")
+                let author = document.getElementById("quoteauth").value
+                let quote = document.getElementById("quote").value
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "/create", true);
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        window.location.href = "/quotes"
+                    }
+                };
+                xhr.setRequestHeader("Content-Type", "application/json");
+                let data = JSON.stringify({ "author": author, "quote": quote });
+                xhr.send(data);
+            });
+    </script>
+</body>
+
 </html>

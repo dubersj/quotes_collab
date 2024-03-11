@@ -6,7 +6,7 @@
             {% for item in data %}
             <tr>
                 <td>
-                    {{item["text"]}}
+                    {{item["quote"]}}
                 </td>
                 <td>
                     <em>-- {{item["author"]}}</em>
@@ -14,8 +14,12 @@
                 <td>
                     [ <a href="/edit/{{item['_id']}}">{{item["_id"]}}</a> ]
                 </td>
+                <td>
+                    <a href="/delete/{{item['_id']}}"><button id="delete_quote">Delete</button></a>
+                </td>
             </tr>
             {% endfor %}
         </table>
+        
     </body>
 </html>
