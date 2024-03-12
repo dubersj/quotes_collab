@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template, request #redirect
 from mongita import MongitaClientDisk
 from bson import ObjectId
 import json
@@ -26,12 +26,11 @@ def get_quotes():
 @app.route("/delete", methods=["GET"])
 @app.route("/delete/<id>", methods=["GET"])
 def get_delete(id=None):
-    print(id)
     if id:
         quotes_collection = quotes_db.quotes_collection
-        data = list(quotes_collection.find_one({"_id":ObjectId(id)}))
-        quotes_collection.delete_one({"_id":ObjectId(id)})
-    return redirect("/quotes")
+        data = list(quotes_collection.find({"_id":ObjectId(id)}))
+        quotes_collection.delete_one(_id=ObjectId(id))
+    return render_template("quotes.html", data=data)
 
 @app.route("/edit", methods=["GET"])
 @app.route("/edit/<id>", methods=["GET"])
@@ -39,8 +38,9 @@ def get_edit(id=None):
     if id:
         quotes_collection = quotes_db.quotes_collection
         data = quotes_collection.find_one({"_id":ObjectId(id)})
-        print(data)
-    return render_template("form.html",data=data)
+    return render_template("form.html")
+
+
 
 @app.route("/create", methods=["POST"])
 def get_create():
@@ -49,7 +49,7 @@ def get_create():
     
     print(json.loads(data))
     quotes_collection.insert_one(json.loads(data))
-    return render_template("quotes.html", data = list(json.loads(data)))
+    return render_template("quotes.html", data = json.loads())
 # adding /edit /edit/id
 # if form not filled correctly redirect back to edit
 # adding /create get/post
