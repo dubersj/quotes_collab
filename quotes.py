@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request #redirect
+from flask import Flask, render_template, request,redirect
 from mongita import MongitaClientDisk
 from bson import ObjectId
 import json
@@ -29,7 +29,7 @@ def get_delete(id=None):
     if id:
         quotes_collection = quotes_db.quotes_collection
         data = list(quotes_collection.find({"_id":ObjectId(id)}))
-        quotes_collection.delete_one(_id=ObjectId(id))
+        quotes_collection.delete_one({"_id":ObjectId(id)})
     return render_template("quotes.html", data=data)
 
 @app.route("/edit", methods=["GET"])
@@ -49,7 +49,7 @@ def get_create():
     
     print(json.loads(data))
     quotes_collection.insert_one(json.loads(data))
-    return render_template("quotes.html", data = json.loads())
+    return redirect("/quotes")
 # adding /edit /edit/id
 # if form not filled correctly redirect back to edit
 # adding /create get/post
