@@ -1,21 +1,40 @@
 <html>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
     <body>
         <h1>Quotes</h1>
         <hr/>
-        <table>
-            {% for item in data %}
-            <tr>
-                <td>
-                    {{item["text"]}}
-                </td>
-                <td>
-                    <em>-- {{item["author"]}}</em>
-                </td>
-                <td>
-                    [ <a href="/edit/{{item['_id']}}">{{item["_id"]}}</a> ]
-                </td>
-            </tr>
-            {% endfor %}
+        <h3>Create New Quote</h3>
+        <a href="/edit">Create Quote</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">EDIT</th>
+                    <th scope="col">QUOTE</th>
+                    <th scope="col">AUTHOR</th>
+                    <th scope="col">DELETE</th>
+                  </tr>
+            </thead>
+            <tbody>
+
+                
+                <tbody>
+                    {% for item in data %}
+                  <tr>
+                    <th scope="row">[ <a href="/edit/{{item['_id']}}">{{item["_id"]}}</a> ]</th>
+                    <td>{{item["author"]}}</td>
+                    <td>{{item["quote"]}}</td>
+                    <td><a href="/delete/{{item['_id']}}"><button class="btn btn-danger" id="delete_quote">Delete</button></a></td>
+                  </tr>
+                  {% endfor %}
+                
+                </tbody>
+              </table>
+        </tbody>
+
         </table>
+        
     </body>
 </html>
