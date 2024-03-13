@@ -30,7 +30,7 @@ def get_delete(id=None):
         quotes_collection = quotes_db.quotes_collection
         data = list(quotes_collection.find({"_id":ObjectId(id)}))
         quotes_collection.delete_one({"_id":ObjectId(id)})
-    return render_template("quotes.html", data=data)
+    return redirect("/quotes")
 
 @app.route("/edit", methods=["GET"])
 @app.route("/edit/<id>", methods=["GET"])
@@ -38,7 +38,8 @@ def get_edit(id=None):
     if id:
         quotes_collection = quotes_db.quotes_collection
         data = quotes_collection.find_one({"_id":ObjectId(id)})
-    return render_template("form.html")
+        return render_template("form.html", data=data)
+    else: return render_template("form.html")
 
 
 
