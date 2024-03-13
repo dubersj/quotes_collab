@@ -10,15 +10,15 @@
     <form id="create_quote" method="POST">
         <input type="text" id="quoteauth" name="quoteauth" value={{data.author}} />
         <label for="quoteauth">Author</label><br>
-        <input type="text" id="quote" name="quoteauth" value={{data.quote}}>
+        <textarea type="text" rows=10 cols=100 id="quote" name="quoteauth" value="{{data.quote}}"></textarea>
         <label for="quoteauth">Quote</label><br>
         <button id="">Submit</button>
     </form>
     {% else %}
     <form id="create_quote" method="POST">
-        <input type="text" id="quoteauth" name="quoteauth" value="quoteauth" />
+        <input type="text" id="quoteauth" name="quoteauth" placeholder="Author" />
         <label for="quoteauth">Author</label><br>
-        <input type="text" id="quote" name="quoteauth" value="quoteauth">
+        <textarea type="text" rows=10 cols=100 id="quote" name="quoteauth" placeholder="Quote"></textarea>
         <label for="quoteauth">Quote</label><br>
         <button id="">Submit</button>
     </form>

@@ -24,8 +24,8 @@
                     {% for item in data %}
                   <tr>
                     <th scope="row">[ <a href="/edit/{{item['_id']}}">{{item["_id"]}}</a> ]</th>
-                    <td>{{item["author"]}}</td>
                     <td>{{item["quote"]}}</td>
+                    <td>{{item["author"]}}</td>
                     <td><a href="/delete/{{item['_id']}}"><button class="btn btn-danger" id="delete_quote">Delete</button></a></td>
                   </tr>
                   {% endfor %}
