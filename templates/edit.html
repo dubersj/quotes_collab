@@ -10,25 +10,19 @@
     <hr />
     <a href="/">Cancel</a>
     {% if data %}
-    <form id="create_quote" method="POST">
+    <form id="update_quote" method="POST">
         <input type="text" id="quoteauth" name="quoteauth" value="{{data.author}}" />
         <label for="quoteauth">Author</label><br />
         <textarea type="text" rows="10" cols="100" id="quote" name="quoteauth">{{data["quote"]}}</textarea>
         <label for="quoteauth">Quote</label><br />
         <button id="">Submit</button>
     </form>
-    {% else %}
-    <form id="create_quote" method="POST">
-        <input type="text" id="quoteauth" name="quoteauth" placeholder="Author" />
-        <label for="quoteauth">Author</label><br />
-        <textarea type="text" rows="10" cols="100" id="quote" name="quoteauth" placeholder="Quote"></textarea>
-        <label for="quoteauth">Quote</label><br />
-        <button id="">Submit</button>
-    </form>
     {% endif %}
+
     <script>
+        
         document
-            .getElementById("create_quote")
+            .getElementById("update_quote")
             .addEventListener("submit", (e) => {
                 e.preventDefault();
                 console.log("Clicked");
@@ -36,7 +30,7 @@
                 let quote = document.getElementById("quote").value;
 
                 let xhr = new XMLHttpRequest();
-                xhr.open("POST", "/create", true);
+                xhr.open("POST", "/update", true);
                 xhr.onload = () => {
                     if (xhr.status === 200) {
                         window.location.href = "/quotes";
